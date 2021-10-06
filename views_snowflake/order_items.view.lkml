@@ -201,7 +201,7 @@ dimension_group: since_purchase {
   dimension: long_time {
     type: yesno
     description: "Yes means arrival took more than 4 days from shipment"
-    sql: ${days_ship_deliv_diff} > 4;;
+    sql: ${days_ship_deliv_diff} > 3;;
   }
 
 
