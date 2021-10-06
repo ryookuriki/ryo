@@ -22,13 +22,13 @@ view: order_items {
       year
     ]
     sql: ${TABLE}."CREATED_AT" ;;
-    html:  {% if value == 'Saturday' %}
-          <font color="blue"> {{ created_date._value }} </font>
-          {% elsif value == 'Sunday' %}
-          <font color="red"> {{ created_date._value }} </font>
-          {% else %}
-          {{ created_date._value }}
-          {% endif %};;
+    # html:  {% if value == 'Saturday' %}
+    #       <font color="blue"> {{ created_date._value }} </font>
+    #       {% elsif value == 'Sunday' %}
+    #       <font color="red"> {{ created_date._value }} </font>
+    #       {% else %}
+    #       {{ created_date._value }}
+    #       {% endif %};;
   }
 
   dimension: days_in_filter {
