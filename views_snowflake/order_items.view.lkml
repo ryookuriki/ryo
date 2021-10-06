@@ -244,7 +244,7 @@ dimension_group: since_purchase {
 
   measure: discounted_sale_price {
     type: number
-    sql: ${sale_price} * 0.8 ;;
+    sql: ${sale_price} * 0.5 ;;
   }
 
   dimension_group: shipped {
