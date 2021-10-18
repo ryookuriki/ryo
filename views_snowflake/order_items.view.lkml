@@ -9,6 +9,7 @@ view: order_items {
     sql: ${TABLE}."ID" ;;
   }
 
+
   dimension_group: created {
     type: time
     timeframes: [
@@ -233,11 +234,6 @@ dimension_group: since_purchase {
   }
 
   measure: sale_price {
-    type: sum
-    sql: ${TABLE}."SALE_PRICE" ;;
-  }
-
-  measure: sale_prices {
     type: sum
     sql: ${TABLE}."SALE_PRICE" ;;
   }

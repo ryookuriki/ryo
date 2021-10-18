@@ -11,6 +11,8 @@ datagroup: test_kuriki_default_datagroup {
 
 persist_with: test_kuriki_default_datagroup
 
+week_start_day: sunday
+
 explore: distribution_centers {}
 
 explore: etl_jobs {}

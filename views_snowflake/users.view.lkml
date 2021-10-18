@@ -13,6 +13,23 @@ view: users {
     type: number
     sql: ${TABLE}."AGE" ;;
   }
+###################
+
+  measure: max_age {
+    type: number
+    sql: max ${age} ;;
+  }
+
+  measure: max_age2 {
+    type: max
+    sql:${age} ;;
+  }
+
+  measure: max_ages {
+    type: string
+    sql:concat(${max_age}, 'years old') ;;
+  }
+  ##################
 
   dimension: tier_age {
     type: tier
