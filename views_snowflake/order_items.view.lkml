@@ -3,10 +3,21 @@ view: order_items {
     ;;
   drill_fields: [id]
 
+filter: date {
+  type: date
+}
+ # <p font-weight: bold; >{{value}}</p>
   dimension: id {
     primary_key: yes
     type: number
     sql: ${TABLE}."ID" ;;
+    html: {% if value == 1 %}
+    <font color="blue"> {{ id._value }} </font>
+    {% elsif value == 2 %}
+    <font color="red"> {{ id._value }} </font>
+    {% else %}
+    {{ value }}
+    {% endif %};;
   }
 
 
@@ -32,6 +43,18 @@ view: order_items {
     #       {% endif %};;
   }
 
+  parameter: param_limit_date {
+    label: "満期日指定フィルター"
+    type: date
+  }
+
+  measure: test_label_thismonth_text2 {
+    type: string
+    sql: 1;;
+    html:
+    これは「当月：{{order_id._parameter_value | date: "%Y-%m-%d" }}」のデータを表示しています ;;
+  }
+
   dimension: days_in_filter {
     ##hidden: yes
     type: number
@@ -47,6 +70,14 @@ view: order_items {
     Month
     {%endif%}"
     sql: ${created_date} ;;
+  }
+
+  dimension: test {
+    type: date
+    sql: case
+    when ${order_items.delivered_date} is null then ${order_items.shipped_date}
+    else ${order_items.delivered_date}
+    END ;;
   }
 
 
@@ -127,6 +158,7 @@ dimension_group: order_ship_diff {
     ]
   sql_start: ${created_raw};;
   sql_end: ${shipped_raw} ;;
+
 }
 
   dimension_group: ship_deliv_diff {
@@ -236,6 +268,9 @@ dimension_group: since_purchase {
   measure: sale_price {
     type: sum
     sql: ${TABLE}."SALE_PRICE" ;;
+    link: {
+      label: "5000 Results"
+      url: "{{ link }}&limit=5000" }
   }
 
   measure: discounted_sale_price {

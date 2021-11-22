@@ -1,4 +1,5 @@
 view: users {
+  suggestions: no
   sql_table_name: "PUBLIC"."USERS"
     ;;
   drill_fields: [id]
@@ -33,7 +34,7 @@ view: users {
 
   dimension: tier_age {
     type: tier
-    tiers: [22]
+    tiers: [10,20,30,40,50,60,70]
     style:integer
     sql:${age};;
   }
@@ -45,6 +46,7 @@ view: users {
 
   dimension: country {
     type: string
+    suggestions: ["USA"]
     map_layer_name: countries
     sql: ${TABLE}."COUNTRY" ;;
   }

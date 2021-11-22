@@ -19,18 +19,31 @@ view: events {
     sql: ${TABLE}."CITY" ;;
   }
 
+  measure: dist_count {
+    type: count_distinct
+    sql: ${TABLE}."BROWSER", ${TABLE}."COUNTRY";;
+  }
+
+  dimension: country_map_layer {
+    type: string
+    map_layer_name: countries
+    sql: ${country} ;;
+  }
+
   dimension: country {
     type: string
     map_layer_name: countries
     sql: ${TABLE}."COUNTRY" ;;
   }
 
+  dimension: countries_yesno {
+    type: yesno
+    sql: CASE WHEN ${TABLE}."COUNTRY" = 'USA' THEN TRUE WHEN ${TABLE}."COUNTRY" = 'UK' THEN FALSE ELSE NULL END ;;
+  }
 
-
-  dimension: country_map_layer {
-    type: string
-    map_layer_name: countries
-    sql: ${country} ;;
+  dimension: countries_case {
+    type: yesno
+    sql: ${TABLE}."COUNTRY" = 'USA' ;;
   }
 
 

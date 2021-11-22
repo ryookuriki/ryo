@@ -3,6 +3,24 @@ view: products {
     ;;
   drill_fields: [id]
 
+  parameter: param_limit_date {
+    label: "満期日指定フィルター"
+    type: date
+  }
+
+  parameter: param_limit_date2 {
+    label: "満期日指定フィルター2"
+    type: date
+  }
+
+  measure: test_label_thismonth_text {
+    type: string
+    sql: 1;;
+    html:
+    これは「当月：{{param_limit_date._parameter_value | date: "%Y-%m-%d" }}〜{{param_limit_date2._parameter_value | date: "%Y-%m-%d" }}」のデータを表示しています ;;
+  }
+
+
   dimension: id {
     primary_key: yes
     type: number

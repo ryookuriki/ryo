@@ -13,6 +13,8 @@ persist_with: test_kuriki_default_datagroup
 
 week_start_day: sunday
 
+fiscal_month_offset: -4
+
 explore: distribution_centers {}
 
 explore: etl_jobs {}
@@ -79,4 +81,5 @@ explore: products {
 #   }
 # }
 
-explore: users {}
+explore: users {
+}
