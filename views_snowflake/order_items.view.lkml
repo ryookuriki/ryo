@@ -315,6 +315,7 @@ dimension_group: since_purchase {
     drill_fields: [detail*]
   }
 
+
   measure: first_purchase_date {
     type: date
     sql: min ${created_date} ;;

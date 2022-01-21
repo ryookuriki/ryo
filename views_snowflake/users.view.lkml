@@ -14,6 +14,8 @@ view: users {
     type: number
     sql: ${TABLE}."AGE" ;;
   }
+
+
 ###################
 
   measure: max_age {
@@ -49,7 +51,17 @@ view: users {
     suggestions: ["USA"]
     map_layer_name: countries
     sql: ${TABLE}."COUNTRY" ;;
+    link: {
+      label: "Country Dash"
+      url: "https://lookerv2112.dev.looker.com/dashboards-next/249?&query_timezone={{ _query._query_timezone | url_encode }}"
+    }
   }
+
+  measure: country_count {
+    type: count
+  }
+
+
 
   dimension_group: created {
     type: time
