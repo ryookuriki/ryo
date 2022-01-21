@@ -27,7 +27,11 @@ persist_with: ryo_test_default_datagroup
 
 explore: distribution_centers {}
 
-explore: etl_jobs {}
+# explore: etl_jobs {}
+
+explore: etl_job2 {
+  from: etl_jobs
+}
 
 explore: events {
   join: users {

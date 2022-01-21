@@ -23,6 +23,14 @@ view: users {
     sql: ${TABLE}."AGE" ;;
   }
 
+  dimension: id_multiply_age {
+    type: number
+    sql: ${id}*${age} ;;
+    drill_fields: [id]
+  }
+
+
+
 
   # A measure is a field that uses a SQL aggregate function. Here are defined sum and average
   # measures for this dimension, but you can also add measures of many different aggregates.
@@ -98,10 +106,15 @@ view: users {
     sql: ${TABLE}."LONGITUDE" ;;
   }
 
-  dimension: state {
+  dimension: states {
     type: string
     sql: ${TABLE}."STATE" ;;
   }
+
+  filter:  state_filter {
+    type: string
+     ## sql: {% condition state %} users.state {% endcondition %} ;;
+    }
 
   dimension: traffic_source {
     type: string
