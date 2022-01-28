@@ -26,9 +26,21 @@ view: order_items {
       week,
       month,
       quarter,
-      year
+      year,
+      week_of_year,
+      day_of_week
     ]
     sql: ${TABLE}."CREATED_AT" ;;
+  }
+
+  dimension: week_of_year {
+    type: string
+    sql: cast(${created_week_of_year} as string) ;;
+  }
+
+  dimension: day_of_week {
+    type: string
+    sql: cast(${created_day_of_week} as string) ;;
   }
 
   dimension_group: delivered {
