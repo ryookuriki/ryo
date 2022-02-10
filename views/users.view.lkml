@@ -1,5 +1,6 @@
 # The name of this view in Looker is "Users"
 view: users {
+
   # The sql_table_name parameter indicates the underlying database table
   # to be used for all fields in this view.
   sql_table_name: "PUBLIC"."USERS"
@@ -89,6 +90,16 @@ view: users {
   dimension: gender {
     type: string
     sql: ${TABLE}."GENDER" ;;
+  }
+
+  dimension: male {
+    type: yesno
+    sql: ${gender} = 'Male' ;;
+  }
+
+  dimension: USA {
+    type: yesno
+    sql: ${country} = 'USA' ;;
   }
 
   dimension: last_name {

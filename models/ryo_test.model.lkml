@@ -9,8 +9,8 @@ include: "/views/1month1year.dashboard"
 # use the Quick Help panel on the right to see documentation.
 
 datagroup: ryo_test_default_datagroup {
-  # sql_trigger: SELECT MAX(id) FROM etl_log;;
-  max_cache_age: "1 hour"
+  sql_trigger: SELECT CURRENT_TIMESTAMP();;
+  max_cache_age: "24 hours"
 }
 
 persist_with: ryo_test_default_datagroup
@@ -93,3 +93,5 @@ explore: products {
 explore: users {}
 
 explore: derived_table_user {}
+
+explore: test_derived_table {}
