@@ -1,5 +1,5 @@
 
-include: "/models/ryo_test.model"                # include all views in the views/ folder in this project
+include: "/models/ryo_model1.model"                # include all views in the views/ folder in this project
 
 explore: +distribution_centers {
   label: "extended distribution centers"
