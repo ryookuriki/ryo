@@ -47,6 +47,14 @@ view: distribution_centers {
     sql: ${TABLE}."NAME" ;;
   }
 
+  dimension: position_location {
+    type: location
+    description: "緯度経度"
+    label: "緯度経度"
+    sql_latitude: ${latitude} ;;
+    sql_longitude: ${longitude} ;;
+  }
+
   measure: count {
     type: count
     drill_fields: [id, name, products.count]

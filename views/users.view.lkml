@@ -6,18 +6,35 @@ view: users {
   sql_table_name: "PUBLIC"."USERS"
     ;;
   drill_fields: [id]
-  # This primary key is the unique key for this table in the underlying database.
-  # You need to define a primary key in a view in order to join to other views.
+
+
+  parameter: test_filter {
+    type: unquoted
+    allowed_value: {
+      label: "United States"
+      value: "USA"
+    }
+    allowed_value: {
+      label: "United Kingdom"
+      value: "UK"
+    }
+  }
+
+  dimension: country {
+    type: string
+    map_layer_name: countries
+    sql: ${TABLE}."COUNTRY" ;;
+    # link: {
+    #   label: "URL"
+    #   url: "https://dcl.dev.looker.com/dashboards/2063?Country={{ _filters['users.test_filter'] | url_encode }}"
+    # }
+  }
 
   dimension: id {
     primary_key: yes
     type: number
     sql: ${TABLE}."ID" ;;
   }
-
-  # Here's what a typical dimension looks like in LookML.
-  # A dimension is a groupable field that can be used to filter query results.
-  # This dimension will be called "Age" in Explore.
 
   dimension: age {
     type: number
@@ -29,13 +46,6 @@ view: users {
     sql: ${id}*${age} ;;
     drill_fields: [id]
   }
-
-
-
-
-  # A measure is a field that uses a SQL aggregate function. Here are defined sum and average
-  # measures for this dimension, but you can also add measures of many different aggregates.
-  # Click on the type parameter to see all the options in the Quick Help panel on the right.
 
   measure: total_age {
     type: sum
@@ -54,14 +64,6 @@ view: users {
     sql: ${TABLE}."CITY" ;;
   }
 
-  dimension: country {
-    type: string
-    map_layer_name: countries
-    sql: ${TABLE}."COUNTRY" ;;
-  }
-
-  # Dates and timestamps can be represented in Looker using a dimension group of type: time.
-  # Looker converts dates and timestamps to the specified timeframes within the dimension group.
 
   dimension_group: created {
     type: time

@@ -1,13 +1,14 @@
 view: test_derived_table {
   derived_table: {
-    datagroup_trigger: ryo_test_default_datagroup
-   sql:
+sql_trigger_value: select 1;;
+sql:
     SELECT
     id
     FROM
     users
     GROUP BY
     id ;;
+
 }
 dimension: id {}
 }

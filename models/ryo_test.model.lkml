@@ -95,3 +95,13 @@ explore: users {}
 explore: derived_table_user {}
 
 explore: test_derived_table {}
+
+
+explore: users_extends {
+  extends: [users]
+  from: users
+  view_label: "Extended users"
+  }
+
+
+explore: ktest_extends_users {}
