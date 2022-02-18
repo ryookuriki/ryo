@@ -3,13 +3,14 @@ connection: "snowflakelooker"
 
 # include all the views
 include: "/views/**/*.view"
+include: "/views/1month1year.dashboard"
 
 # Datagroups define a caching policy for an Explore. To learn more,
 # use the Quick Help panel on the right to see documentation.
 
 datagroup: ryo_test_default_datagroup {
-  # sql_trigger: SELECT MAX(id) FROM etl_log;;
-  max_cache_age: "1 hour"
+  sql_trigger: SELECT CURRENT_TIMESTAMP();;
+  max_cache_age: "24 hours"
 }
 
 persist_with: ryo_test_default_datagroup
@@ -27,7 +28,11 @@ persist_with: ryo_test_default_datagroup
 
 explore: distribution_centers {}
 
-explore: etl_jobs {}
+# explore: etl_jobs {}
+
+explore: etl_job2 {
+  from: etl_jobs
+}
 
 explore: events {
   join: users {
@@ -88,3 +93,15 @@ explore: products {
 explore: users {}
 
 explore: derived_table_user {}
+
+explore: test_derived_table {}
+
+
+explore: users_extends {
+  extends: [users]
+  from: users
+  view_label: "Extended users"
+  }
+
+
+explore: ktest_extends_users {}

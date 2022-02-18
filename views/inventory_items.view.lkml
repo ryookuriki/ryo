@@ -14,14 +14,18 @@ view: inventory_items {
     sql: ${TABLE}."ID" ;;
   }
 
-  # Here's what a typical dimension looks like in LookML.
-  # A dimension is a groupable field that can be used to filter query results.
-  # This dimension will be called "Cost" in Explore.
-
   dimension: cost {
     type: number
     sql: ${TABLE}."COST" ;;
   }
+
+  dimension: cost_with_tax {
+    type: number
+    sql: ${TABLE}."COST" * ${id} ;;
+    drill_fields: [cost]
+
+  }
+
 
   # A measure is a field that uses a SQL aggregate function. Here are defined sum and average
   # measures for this dimension, but you can also add measures of many different aggregates.
