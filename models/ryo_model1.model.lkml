@@ -3,6 +3,7 @@ connection: "snowflakelooker"
 
 # include all the views
 include: "/views/**/*.view"
+include: "/views/derived_table_order_items.view"
 include: "/views/1month1year.dashboard"
 include: "/dashboard/gender_dash_lkml.dashboard"
 
