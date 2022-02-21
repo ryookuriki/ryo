@@ -107,3 +107,5 @@ explore: users_extends {
 
 
 explore: ktest_extends_users {}
+
+explore: derived_table_order_items {}

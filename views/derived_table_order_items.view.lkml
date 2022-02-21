@@ -4,7 +4,7 @@ view: derived_table_order_items {
       SELECT
 *      FROM
         users
-      where ${TABLE}."created_date" > "2022/02/02"
+      where users.created_date > "2022/02/02"
       ;;
   }
   dimension: id {
