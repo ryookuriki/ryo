@@ -123,6 +123,11 @@ view: derived_table_order_items {
     drill_fields: [detail*]
   }
 
+  measure: count_id {
+    type: number
+    sql:count(${user_id});;
+    }
+
   # ----- Sets of fields for drilling ------
   set: detail {
     fields: [
