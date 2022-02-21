@@ -3,7 +3,9 @@ view: derived_table_order_items {
     sql:
       SELECT
 *      FROM
-        users;;
+        users
+      where ${TABLE}."created_date" > "2022/02/02"
+      ;;
   }
   dimension: id {
     primary_key: yes
