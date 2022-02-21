@@ -5,7 +5,7 @@ view: derived_table_order_items {
 *      FROM
         users
       where cast(created_at as date) > '2022-02-02'
-      and created_at is null
+      or created_at is null
       ;;
   }
   dimension: id {
