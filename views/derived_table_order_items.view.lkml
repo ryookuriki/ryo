@@ -3,7 +3,7 @@ view: derived_table_order_items {
     sql:
       SELECT
 *      FROM
-        users
+        order_items
       where cast(returned_at as date) > '2022-02-02'
       or returned_at is null
       ;;
