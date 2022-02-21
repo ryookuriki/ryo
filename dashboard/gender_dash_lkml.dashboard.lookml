@@ -3,8 +3,8 @@
   layout: newspaper
   preferred_viewer: dashboards-next
   elements:
-  - title: Gender dash UDD
-    name: Gender dash UDD
+  - title: Gender dash UDDS
+    name: Gender dash UDDS
     model: ryo_model1
     explore: users
     type: table
