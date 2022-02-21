@@ -4,8 +4,8 @@ view: derived_table_order_items {
       SELECT
 *      FROM
         users
-      where cast(created_at as date) > '2022-02-02'
-      or created_at is null
+      where cast(returned_at as date) > '2022-02-02'
+      or returned_at is null
       ;;
   }
   dimension: id {
