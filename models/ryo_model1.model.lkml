@@ -4,6 +4,7 @@ connection: "snowflakelooker"
 # include all the views
 include: "/views/**/*.view"
 include: "/views/1month1year.dashboard"
+include: "/dashboard/gender_dash_lkml.dashboard"
 
 # Datagroups define a caching policy for an Explore. To learn more,
 # use the Quick Help panel on the right to see documentation.
