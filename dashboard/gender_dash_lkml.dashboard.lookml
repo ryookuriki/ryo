@@ -1,5 +1,5 @@
 - dashboard: gender_dash_udd
-  title: Gender dash UDD
+  title: Gender dash UDDS
   layout: newspaper
   preferred_viewer: dashboards-next
   elements:
