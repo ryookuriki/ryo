@@ -95,6 +95,7 @@ view: users {
   }
 
   dimension: male {
+    label: "male"
     type: yesno
     sql: ${gender} = 'Male' ;;
   }

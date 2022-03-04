@@ -25,12 +25,18 @@ view: order_items {
       date,
       week,
       month,
+      month_name,
       quarter,
       year,
       week_of_year,
       day_of_week
     ]
     sql: ${TABLE}."CREATED_AT" ;;
+  }
+
+  dimension: month {
+    type:  string
+    sql: ${created_month_name} ;;
   }
 
   dimension: week_of_year {
@@ -146,4 +152,95 @@ view: order_items {
       users.first_name
     ]
   }
+
+  #------------------------------------------
+
+  dimension_group: esc_time {
+    label: "Escalation Time:"
+    type: time
+    description: "The date and time when the ticket was escalated to the Product Specialist"
+    timeframes: [
+      raw,
+      time,
+      date,
+      week,
+      month,
+      quarter,
+      year
+    ]
+    sql: ${TABLE}."created_at"" ;;
+  }
+
+
+  dimension: esc_time_period {
+    type: string
+    sql:  {% if date_bucket._parameter_value == 'date' %}
+            ${created_date}
+         {% elsif date_bucket._parameter_value == 'week' %}
+             concat(EXTRACT(YEAR FROM ${created_raw}),"-W",EXTRACT(WEEK(MONDAY) FROM ${created_raw}))
+         {% elsif date_bucket._parameter_value == 'month' %}
+             concat(FORMAT_DATE('%b', ${created_raw}) ," ",EXTRACT(YEAR FROM ${created_raw}))
+         {% elsif date_bucket._parameter_value == 'quarter' %}
+             concat(EXTRACT(YEAR FROM ${created_raw})," Q",EXTRACT(QUARTER FROM ${created_raw}))
+         {% elsif date_bucket._parameter_value == 'year' %}
+             EXTRACT(YEAR FROM ${created_raw})
+         {% else %}
+             concat(EXTRACT(YEAR FROM ${created_raw}),"-W",EXTRACT(WEEK(MONDAY) FROM ${created_raw}))
+         {% endif %}
+   ;;
+    order_by_field: esc_time_period_order
+  }
+
+  dimension: esc_time_period_order {
+    hidden: yes
+    type: string
+    sql:  {% if date_bucket._parameter_value == 'week' %}
+           concat(EXTRACT(YEAR FROM ${created_raw}),"-W",EXTRACT(WEEK FROM ${created_raw}))
+         {% else %}
+           ${created_date}
+         {% endif %} ;;
+  }
+
+  dimension: esc_time_period_with_week_date {
+    label: "Escalation Time Period (Filtered)"
+    type: string
+    sql:  {% if date_bucket._parameter_value == 'date' %}
+            ${created_date}
+         {% elsif date_bucket._parameter_value == 'month' %}
+             concat(FORMAT_DATE('%b', ${created_raw}) ," ",EXTRACT(YEAR FROM ${created_raw}))
+         {% elsif date_bucket._parameter_value == 'quarter' %}
+             concat(EXTRACT(YEAR FROM ${created_raw})," Q",EXTRACT(QUARTER FROM ${created_raw}))
+         {% elsif date_bucket._parameter_value == 'year' %}
+             EXTRACT(YEAR FROM ${created_raw})
+         {% else %}
+             DATE_TRUNC(${created_raw},WEEK(MONDAY))
+         {% endif %}
+   ;;
+  }
+
+  parameter: date_bucket {
+    type: unquoted
+    default_value: "week"
+    allowed_value: {
+      label: "Date"
+      value: "date"
+    }
+    allowed_value: {
+      label: "Week"
+      value: "week"
+    }
+    allowed_value: {
+      label: "Month"
+      value: "month"
+    }
+    allowed_value: {
+      label: "Quarter"
+      value: "quarter"
+    }
+    allowed_value: {
+      label: "Year"
+      value: "year"
+    }
+    }
+
 }
